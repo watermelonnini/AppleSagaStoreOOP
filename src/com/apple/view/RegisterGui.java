@@ -11,8 +11,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -92,9 +95,9 @@ public class RegisterGui extends JFrame {
 		lblNewLabel_1.setBounds(421, 31, 155, 39);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Name : ");
+		JLabel lblNewLabel_2 = new JLabel("Full Name : ");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_2.setBounds(199, 86, 77, 22);
+		lblNewLabel_2.setBounds(199, 86, 190, 22);
 		contentPane.add(lblNewLabel_2);
 		
 		textFieldName = new JTextField();
@@ -238,5 +241,44 @@ public class RegisterGui extends JFrame {
 		passwordField.setColumns(10);
 		passwordField.setBounds(199, 335, 544, 30);
 		contentPane.add(passwordField);
+		
+		JCheckBox showPasswordCheckBox = new JCheckBox("Show Password");
+		showPasswordCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		showPasswordCheckBox.setBounds(750, 335, 200, 30);
+        showPasswordCheckBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    passwordField.setEchoChar((char) 0);
+                } else {
+                    passwordField.setEchoChar('\u2022');
+                }
+            }
+        });
+        contentPane.add(showPasswordCheckBox);
+
+        // Show Confirm Password Checkbox
+        JCheckBox showConfirmPasswordCheckBox = new JCheckBox("Show Confirm Password");
+        showConfirmPasswordCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 8));
+        showConfirmPasswordCheckBox.setBounds(750, 407, 200, 30);
+        showConfirmPasswordCheckBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    confirmPasswordField.setEchoChar((char) 0);
+                } else {
+                    confirmPasswordField.setEchoChar('\u2022');
+                }
+            }
+        });
+        contentPane.add(showConfirmPasswordCheckBox);
+        
+        JLabel lblNewLabel_4_2 = new JLabel("[601xxxxxxxx]");
+        lblNewLabel_4_2.setFont(new Font("Tahoma", Font.ITALIC, 10));
+        lblNewLabel_4_2.setBounds(753, 264, 85, 22);
+        contentPane.add(lblNewLabel_4_2);
+        
+        JLabel lblNewLabel_4_2_1 = new JLabel("[xx@mail.com]");
+        lblNewLabel_4_2_1.setFont(new Font("Tahoma", Font.ITALIC, 10));
+        lblNewLabel_4_2_1.setBounds(753, 195, 85, 22);
+        contentPane.add(lblNewLabel_4_2_1);
 	}
 }
