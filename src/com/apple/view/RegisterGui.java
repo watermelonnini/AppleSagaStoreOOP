@@ -26,21 +26,24 @@ public class RegisterGui extends JFrame {
 	private JTextField textFieldAddress;
 	private JPasswordField confirmPasswordField;
 	private JPasswordField passwordField;
+	private LoginPageGui loginPageGui;
+
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RegisterGui frame = new RegisterGui();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	    EventQueue.invokeLater(new Runnable() {
+	        public void run() {
+	            try {
+	                LoginPageGui loginPageGui = new LoginPageGui();
+	                RegisterGui frame = new RegisterGui(loginPageGui);
+	                frame.setVisible(true);
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    });
 	}
 	
 	private boolean isValidEmail(String email) {
@@ -56,7 +59,10 @@ public class RegisterGui extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegisterGui() {
+	public RegisterGui(LoginPageGui loginPageGui) {
+		
+		this.loginPageGui = loginPageGui;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 960, 600);
 		contentPane = new JPanel();
@@ -72,11 +78,10 @@ public class RegisterGui extends JFrame {
 		
 		JButton buttonBack = new JButton("Back");
 		buttonBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				LoginPageGui frame = new LoginPageGui();
-				frame.setVisible(true);
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        loginPageGui.setVisible(true);
+		        RegisterGui.this.dispose();
+		    }
 		});
 		buttonBack.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		buttonBack.setBounds(45, 64, 85, 34);
@@ -212,15 +217,10 @@ public class RegisterGui extends JFrame {
 			// Close the RegisterGui
 	        dispose();
 	        
-	        // Open the LoginPageGui
 	        EventQueue.invokeLater(new Runnable() {
 	            public void run() {
-	                try {
-	                    LoginPageGui frame = new LoginPageGui();
-	                    frame.setVisible(true);
-	                } catch (Exception ex) {
-	                    ex.printStackTrace();
-	                }
+	                loginPageGui.setVisible(true);
+	                RegisterGui.this.dispose();
 	            }
 	        });
 	    }
