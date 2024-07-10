@@ -103,12 +103,11 @@ public class LoginPageGui extends JFrame {
 		
 		JToggleButton buttonSignUp = new JToggleButton("Sign up here");
 		buttonSignUp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				RegisterGui frame = new RegisterGui();
-				frame.setVisible(true);
-				
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        RegisterGui registerGui = new RegisterGui(LoginPageGui.this);
+		        registerGui.setVisible(true);
+		        LoginPageGui.this.setVisible(false);
+		    }
 		});
 		buttonSignUp.setBackground(UIManager.getColor("Button.darkShadow"));
 		buttonSignUp.setFont(new Font("Segoe UI", Font.PLAIN, 16));
